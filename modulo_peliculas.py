@@ -24,8 +24,13 @@ NOTA IMPORTANTE PARA TENER EN CUENTA EN TODAS LAS FUNCIONES DE ESTE MODULO:
             - dia (str): Indica que día de la semana se planea ver la película
 """
 
-def crear_pelicula(nombre: str, genero: str, duracion: int, anio: int, 
-                  clasificacion: str, hora: int, dia: str) -> dict:
+
+def convertir_minutos_a_segundos(minutos: int) -> int:
+    return (minutos*3600)/60
+
+
+def crear_pelicula(nombre: str, genero: str, duracion: int, anio: int,
+                   clasificacion: str, hora: int, dia: str) -> dict:
     """Crea un diccionario que representa una nueva película con toda su información 
        inicializada.
     Parámetros:
@@ -39,9 +44,22 @@ def crear_pelicula(nombre: str, genero: str, duracion: int, anio: int,
         dia (str): Dia de la semana en el cual se planea ver la pelicula.
     Retorna:
         dict: Diccionario con los datos de la pelicula
-    """    
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return None
+    """
+    if (hora < 0 or hora > 2359):
+        print("Error: La hora debe estar entre 0 a 2359")
+        return None
+    nueva_pelicula = {
+        "nombre": nombre,
+        "genero": genero,
+        "duracion": duracion,
+        "anio": anio,
+        "clasificacion": clasificacion,
+        "hora": hora,
+        "dia": dia
+    }
+
+    return nueva_pelicula
+
 
 def encontrar_pelicula(nombre_pelicula: str, p1: dict, p2: dict, p3: dict, p4: dict,  p5: dict) -> dict:
     """Encuentra en cual de los 5 diccionarios que se pasan por parametro esta la 
@@ -58,8 +76,19 @@ def encontrar_pelicula(nombre_pelicula: str, p1: dict, p2: dict, p3: dict, p4: d
         dict: Diccionario de la pelicula cuyo nombre fue dado por parametro. 
         None si no se encuentra una pelicula con ese nombre.
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return None
+    pelicula_encontrada = None
+    if (p1["nombre"].lower() == nombre_pelicula.lower()):
+        pelicula_encontrada = p1
+    if (p2["nombre"].lower() == nombre_pelicula.lower()):
+        pelicula_encontrada = p2
+    if (p3["nombre"].lower() == nombre_pelicula.lower()):
+        pelicula_encontrada = p3
+    if (p4["nombre"].lower() == nombre_pelicula.lower()):
+        pelicula_encontrada = p4
+    if (p5["nombre"].lower() == nombre_pelicula.lower()):
+        pelicula_encontrada = p5
+    return pelicula_encontrada
+
 
 def encontrar_pelicula_mas_larga(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> dict:
     """Encuentra la pelicula de mayor duracion entre las peliculas recibidas por
@@ -73,8 +102,22 @@ def encontrar_pelicula_mas_larga(p1: dict, p2: dict, p3: dict, p4: dict, p5: dic
     Retorna:
         dict: El diccionario de la pelicula de mayor duracion
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return None
+    pelicula_mas_larga = p1
+    duracion_mas_larga = p1["duracion"]
+    if (p2["duracion"] > duracion_mas_larga):
+        pelicula_mas_larga = p2
+        duracion_mas_larga = p2["duracion"]
+    if (p3["duracion"] > duracion_mas_larga):
+        pelicula_mas_larga = p3
+        duracion_mas_larga = p3["duracion"]
+    if (p4["duracion"] > duracion_mas_larga):
+        pelicula_mas_larga = p4
+        duracion_mas_larga = p4["duracion"]
+    if (p5["duracion"] > duracion_mas_larga):
+        pelicula_mas_larga = p5
+        duracion_mas_larga = p5["duracion"]
+    return pelicula_mas_larga
+
 
 def duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> str:
     """Calcula la duracion promedio de las peliculas que entran por parametro. 
@@ -89,8 +132,23 @@ def duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
     Retorna:
         str: la duracion promedio de las peliculas en formato 'HH:MM'
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return ""
+    duracion_promedio = (p1["duracion"] + p2["duracion"] +
+                         p3["duracion"] + p4["duracion"] + p5["duracion"])//5
+
+    fullHours = (duracion_promedio)/60
+    hours = int(fullHours)
+    fullMinutes = int((hours - fullHours)*100)
+    if(fullMinutes > 60):
+        minutes = fullMinutes - 59
+        hours += 1
+    else:
+        minutes = fullMinutes
+
+    hh = str(hours).zfill(2)
+    mm = str(minutes).zfill(2)
+
+    return hh+":"+mm
+
 
 def encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict, anio: int) -> str:
     """Busca entre las peliculas cuales tienen como anio de estreno una fecha estrictamente
@@ -107,8 +165,24 @@ def encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict, anio: i
         Si hay mas de una pelicula, entonces se retornan los nombres de todas las peliculas 
         encontradas separadas por comas. Si ninguna pelicula coincide, retorna "Ninguna".
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return ""
+    anio_estreno_superior = ""
+
+    if (p1["anio"] > anio):
+        anio_estreno_superior = p1["nombre"]
+    if (p2["anio"] > anio):
+        anio_estreno_superior = anio_estreno_superior + "," + p2["nombre"]
+    if (p3["anio"] > anio):
+        anio_estreno_superior = anio_estreno_superior + "," + p3["nombre"]
+    if (p4["anio"] > anio):
+        anio_estreno_superior = anio_estreno_superior + "," + p4["nombre"]
+    if (p5["anio"] > anio):
+        anio_estreno_superior = anio_estreno_superior + "," + p5["nombre"]
+
+    if (anio_estreno_superior == ""):
+        anio_estreno_superior = "Ninguna"
+
+    return anio_estreno_superior
+
 
 def cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> int:
     """Indica cuantas peliculas de clasificación '18+' hay entre los diccionarios recibidos.
@@ -121,11 +195,25 @@ def cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -
     Retorna:
         int: Numero de peliculas con clasificacion '18+'
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return -1
 
-def reagendar_pelicula(peli:dict, nueva_hora: int, nuevo_dia: str, 
-                       control_horario: bool, p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->bool: 
+    peliculas_clasificacion_18_mas = 0
+
+    if(p1['clasificacion'] == "18+"):
+        peliculas_clasificacion_18_mas += 1
+    if(p2['clasificacion'] == "18+"):
+        peliculas_clasificacion_18_mas += 1
+    if(p3['clasificacion'] == "18+"):
+        peliculas_clasificacion_18_mas += 1
+    if(p4['clasificacion'] == "18+"):
+        peliculas_clasificacion_18_mas += 1
+    if(p5['clasificacion'] == "18+"):
+        peliculas_clasificacion_18_mas += 1
+
+    return peliculas_clasificacion_18_mas
+
+
+def reagendar_pelicula(peli: dict, nueva_hora: int, nuevo_dia: str,
+                       control_horario: bool, p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> bool:
     """Verifica si es posible reagendar la pelicula que entra por parametro. Para esto verifica
        si la nueva hora y el nuevo dia no entran en conflicto con ninguna otra pelicula, 
        y en caso de que el usuario haya pedido control horario verifica que se cumplan 
@@ -144,10 +232,24 @@ def reagendar_pelicula(peli:dict, nueva_hora: int, nuevo_dia: str,
     Retorna:
         bool: True en caso de que se haya podido reagendar la pelicula, False de lo contrario.
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return False
-    
-def decidir_invitar(peli: dict, edad_invitado: int, autorizacion_padres: bool)->bool:
+
+    se_puede_reagendar = False
+    if (control_horario):
+        if(p1['hora'] != nueva_hora and p1['dia'] != nuevo_dia):
+            se_puede_reagendar = True
+        elif (p2['hora'] != nueva_hora and p2['dia'] != nuevo_dia):
+            se_puede_reagendar = True
+        elif (p3['hora'] != nueva_hora and p3['dia'] != nuevo_dia):
+            se_puede_reagendar = True
+        elif (p4['hora'] != nueva_hora and p4['dia'] != nuevo_dia):
+            se_puede_reagendar = True
+        elif (p5['hora'] != nueva_hora and p5['dia'] != nuevo_dia):
+            se_puede_reagendar = True
+
+    return se_puede_reagendar
+
+
+def decidir_invitar(peli: dict, edad_invitado: int, autorizacion_padres: bool) -> bool:
     """Verifica si es posible invitar a la persona cuya edad entra por parametro a ver la 
        pelicula que entra igualmente por parametro. 
        Para esto verifica el cumplimiento de las restricciones correspondientes.
@@ -159,14 +261,12 @@ def decidir_invitar(peli: dict, edad_invitado: int, autorizacion_padres: bool)->
     Retorna:
         bool: True en caso de que se pueda invitar a la persona, False de lo contrario.
     """
-    #TODO: completar y remplazar la siguiente línea por el resultado correcto 
-    return False
-
-
-
-
-
-
-
-
-
+    
+    
+    
+    
+    edad_permitida = int(peli["clasificacion"].replace("+",""))
+    invitado_puede_ver_pelicula = autorizacion_padres and edad_invitado >= edad_permitida
+    
+    
+    return invitado_puede_ver_pelicula
