@@ -53,15 +53,8 @@ def mostrar_informacion_pelicula(pelicula: dict)-> None:
     print("Dia: " + dia + " Hora: " + hora_formato + ":" + min_formato)
 
 def ejecutar_encontrar_pelicula_mas_larga(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
-    """Ejecuta la opcion de encontrar la pelicula mas larga.
-    Parametros:
-        p1 (dict): Diccionario que contiene la informacion de la pelicula 1.
-        p2 (dict): Diccionario que contiene la informacion de la pelicula 2.
-        p3 (dict): Diccionario que contiene la informacion de la pelicula 3.
-        p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
-        p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
-    """
-   # TODO: Completar
+   pelicula_mas_larga = mod.encontrar_pelicula_mas_larga(p1, p2, p3, p4, p5)
+   print('La pelicula más larga es: ', pelicula_mas_larga)
 
 def ejecutar_consultar_duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict)->None:
     """Ejecuta la opcion de consultar la duracion promedio de las peliculas.
