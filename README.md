@@ -6,15 +6,20 @@ This is a python 🐍 terminal application for scheduler movies 🎥🍿. This p
 
 # How you can run the program with makefile
 - Up the application
+
 1.- run `make docker-up`
 
 - Down the application
+
 1.- run `make docker-down`
 
 # How you can run the program with docker 🐳
 - Up the application
+
 1.- run `docker-compose up --build`
+
 2.- run `docker exec -it python-movie-scheduler-app python consola_peliculas.py`
 
 - Down the application
+
 1.- run `docker-compose down`
