@@ -73,16 +73,11 @@ def ejecutar_encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
 
 
 def ejecutar_cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
-    """Ejecuta la opcion de consultar cuantas peliculas de la agenda tienen clasificacion
-    18+.
-    Parametros:
-        p1 (dict): Diccionario que contiene la informacion de la pelicula 1.
-        p2 (dict): Diccionario que contiene la informacion de la pelicula 2.
-        p3 (dict): Diccionario que contiene la informacion de la pelicula 3.
-        p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
-        p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
-    """
-    # TODO: Completar
+    peliculas_mayores_de_dieciocho = mod.cuantas_peliculas_18_mas(
+        p1, p2, p3, p4, p5)
+
+    print("Las peliculas para mayores de 18 años son: ",
+          peliculas_mayores_de_dieciocho)
 
 
 def ejecutar_reagendar_pelicula(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:

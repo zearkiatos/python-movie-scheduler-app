@@ -2,6 +2,7 @@
 This is a python 🐍 terminal application for scheduler movies 🎥🍿. This project is for learn, practice and understand python.
 
 ![Github](https://github.com/zearkiatos/python-movie-scheduler-app/actions/workflows/action.yml/badge.svg)
+![GitlabCI](https://gitlab.com/caprilespe/python-movie-scheduler-app/badges/develop/pipeline.svg)
 
 # Make with
 [![Python](https://img.shields.io/badge/python-2b5b84?style=for-the-badge&logo=python&logoColor=white&labelColor=000000)]()
