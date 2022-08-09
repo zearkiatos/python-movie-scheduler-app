@@ -1,0 +1,26 @@
+image: python:alpine3.16
+stages:
+  - docker
+
+build-docker:
+  image: docker:latest
+  variables:
+    DOCKER_DRIVER: overlay
+    CRYPTOGRAPHY_DONT_BUILD_RUST: 1
+  services:
+  - docker:dind
+  stage: docker
+  environment: staging
+  cache:
+    paths:
+      - node_modules/
+  dependencies:
+    - install-dependencies
+    - test-app
+  script:
+    - echo "Build docker 🐳"
+    - docker build . -t=python-movie-scheduler-app:gitlab-ci-build-${CI_PIPELINE_IID}
+  artifacts:
+    expire_in: 1hr
+    paths:
+      - build

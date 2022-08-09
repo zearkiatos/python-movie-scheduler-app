@@ -62,20 +62,14 @@ def ejecutar_encontrar_pelicula_mas_larga(p1: dict, p2: dict, p3: dict, p4: dict
 
 def ejecutar_consultar_duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
     duracion_promedio = mod.duracion_promedio_peliculas(p1, p2, p3, p4, p5)
-    print("La duración promedio de las peliculas es de: ", duracion_promedio)
+    print("\nLa duración promedio de las peliculas es de: \n", duracion_promedio)
 
 
 def ejecutar_encontrar_estrenos(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
-    """ Ejecuta la opcion de buscar peliculas de estreno. Esto es: las peliculas que sean 
-        mas recientes que un anio dado.
-    Parametros:
-        p1 (dict): Diccionario que contiene la informacion de la pelicula 1.
-        p2 (dict): Diccionario que contiene la informacion de la pelicula 2.
-        p3 (dict): Diccionario que contiene la informacion de la pelicula 3.
-        p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
-        p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
-    """
-    # TODO: Completar
+    anio = int(
+        input("Ingrese el año de estreno las peliculas que quiera buscar: "))
+    estrenos = mod.encontrar_estrenos(p1, p2, p3, p4, p5, anio)
+    print("\nLas peliculas a estrenarse son: ", estrenos)
 
 
 def ejecutar_cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
