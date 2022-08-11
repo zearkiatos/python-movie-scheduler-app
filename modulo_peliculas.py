@@ -137,7 +137,8 @@ def duracion_promedio_peliculas(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
 
     fullHours = (duracion_promedio)/60
     hours = int(fullHours)
-    fullMinutes = int((hours - fullHours)*100)
+    fullMinutes = int((fullHours - hours )*100)
+    print(fullMinutes)
     if(fullMinutes > 60):
         minutes = fullMinutes - 59
         hours += 1
