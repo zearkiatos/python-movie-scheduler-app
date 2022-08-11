@@ -81,14 +81,7 @@ def ejecutar_cuantas_peliculas_18_mas(p1: dict, p2: dict, p3: dict, p4: dict, p5
 
 
 def ejecutar_reagendar_pelicula(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
-    """Ejecuta la opcion de reagendar una pelicula
-    Parametros:
-        p1 (dict): Diccionario que contiene la informacion de la pelicula 1.
-        p2 (dict): Diccionario que contiene la informacion de la pelicula 2.
-        p3 (dict): Diccionario que contiene la informacion de la pelicula 3.
-        p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
-        p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
-    """
+    
     print("Reagendar una pelicula de la agenda")
 
     nombre = input("Ingrese el nombre de la pelicula que desea reagendar: ")
@@ -112,30 +105,30 @@ def ejecutar_reagendar_pelicula(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
 
 
 def ejecutar_decidir_invitar(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
-    """Ejecuta la opcion de decidir si se puede invitar a alguien a ver una pelicula o no.
-    Parametros:
-        p1 (dict): Diccionario que contiene la informacion de la pelicula 1.
-        p2 (dict): Diccionario que contiene la informacion de la pelicula 2.
-        p3 (dict): Diccionario que contiene la informacion de la pelicula 3.
-        p4 (dict): Diccionario que contiene la informacion de la pelicula 4.
-        p5 (dict): Diccionario que contiene la informacion de la pelicula 5.
-    """
+    
     print("Decidir si se puede invitar a alguien a ver una pelicula")
 
     nom_peli = input("Ingrese el nombre de la pelicula: ")
     pelicula = mod.encontrar_pelicula(nom_peli, p1, p2, p3, p4, p5)
+    edad_invitado = int(input("\nIngrese la edad de su invitado: "))
+    respuesta = input(
+        "\nEl invitado tiene autorización de sus padres:\n  ✅ Ingrese (y) si tiene autorización de sus padres\n 🚫 Ingrese (n) si el invitado no tiene autorización de sus padres:\n")
 
+    autorizado = respuesta.lower() == "y"
     if pelicula is None:
         print("No hay ninguna pelicula con este nombre")
-    # TODO: Completar
+    else:
+        puede_invitar = mod.decidir_invitar(
+            pelicula, edad_invitado, autorizado)
+
+    if (puede_invitar):
+        print("Puede invitar a la persona a ver la pelicula")
+    else:
+        print("No puede invitar a la persona a ver la pelicula")
 
 
 def iniciar_aplicacion():
-    """Inicia la ejecución de la aplicación por consola.
-    Esta funcion primero crea las cinco peliculas que se van a manejar en la agenda.
-    Luego la funcion le muestra el menu al usuario y espera a que seleccione una opcion.
-    Esta operacion se repite hasta que el usuario seleccione la opcion de salir.
-    """
+    
     pelicula1 = mod.crear_pelicula(
         "Shrek",  "Familiar, Comedia", 92, 2001, 'Todos', 1700, "Viernes")
     pelicula2 = mod.crear_pelicula(
