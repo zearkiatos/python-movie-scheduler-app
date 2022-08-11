@@ -92,11 +92,23 @@ def ejecutar_reagendar_pelicula(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict
     print("Reagendar una pelicula de la agenda")
 
     nombre = input("Ingrese el nombre de la pelicula que desea reagendar: ")
+    nueva_hora = int(input("\nIngrese una nueva hora: "))
+    nuevo_dia = input("\nIngrese un nuevo día: ")
+    respuesta = input(
+        "\nDesea establecer un control de horario: \n🕣 Ingrese (y) si desea establecer un control de horario\n🕣 Ingrese (n) si no desea establecer un control de horario \n")
+    control_horario = respuesta.lower() == 'y'
     pelicula = mod.encontrar_pelicula(nombre, p1, p2, p3, p4, p5)
-
+    reagendado = False
     if pelicula is None:
         print("No hay ninguna pelicula con este nombre")
-    # TODO: Completar
+    else:
+        reagendado = mod.reagendar_pelicula(pelicula, nueva_hora,
+                                            nuevo_dia, control_horario, p1, p2, p3, p4, p5)
+
+    if (reagendado):
+        print("La pelicula fue reagendada con exito")
+    else:
+        print("La pelicula no pudo ser reagendada")
 
 
 def ejecutar_decidir_invitar(p1: dict, p2: dict, p3: dict, p4: dict, p5: dict) -> None:
